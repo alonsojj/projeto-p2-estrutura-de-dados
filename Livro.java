@@ -61,4 +61,8 @@ public class Livro {
         .append("}");
     return sb.toString();
   }
+
+  public boolean equal(Livro comp) {
+    return comp.isbn.equals(this.isbn);
+  }
 }
