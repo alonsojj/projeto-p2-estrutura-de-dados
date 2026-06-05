@@ -62,7 +62,7 @@ public class Livro {
     return sb.toString();
   }
 
-  public boolean equal(Livro comp) {
+  public boolean equals(Livro comp) {
     return comp.getIsbn().equals(this.isbn);
   }
 }
