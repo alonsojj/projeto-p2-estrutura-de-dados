@@ -56,7 +56,7 @@ public class Livro {
         .append(autor)
         .append("(")
         .append(anoPub)
-        .append(") {}")
+        .append(") {")
         .append(disponivel ? "DISPONIVEL" : "INDISPONIVEL")
         .append("}");
     return sb.toString();
