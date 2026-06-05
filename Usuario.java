@@ -4,6 +4,12 @@ public class Usuario {
   private String nome;
   private String email;
 
+  public Usuario(int matricula, String nome, String email) {
+    this.matricula = matricula;
+    this.nome = nome;
+    this.email = email;
+  }
+
   public int getMatricula() {
     return matricula;
   }
