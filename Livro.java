@@ -63,6 +63,6 @@ public class Livro {
   }
 
   public boolean equal(Livro comp) {
-    return comp.isbn.equals(this.isbn);
+    return comp.getIsbn().equals(this.isbn);
   }
 }
