@@ -1,4 +1,4 @@
-public class GestorEmprestimo {
+public class GestorEmprestimos {
 
   private NossoHash<String, Fila<Usuario>> map;
   private ListaDupla livros;
