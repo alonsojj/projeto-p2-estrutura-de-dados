@@ -17,9 +17,13 @@ public class Fila<T> {
   }
 
   public T desenfileira() {
-    if (filaVazia()) throw new FilaVaziaException("Fila estava vazia");
-    T aux = ultimo.getInfo();
+    if (filaVazia())
+      throw new FilaVaziaException("Fila estava vazia");
+    T aux = primeiro.getInfo();
     primeiro = primeiro.getProximo();
+    if (primeiro == null) {
+      ultimo = null;
+    }
     return aux;
   }
 
@@ -43,6 +47,7 @@ public class Fila<T> {
     No<T> atual = primeiro;
     while (atual != null) {
       sb.append(atual).append("->");
+      atual = atual.getProximo();
     }
     sb.append("\\");
     return sb.toString();
