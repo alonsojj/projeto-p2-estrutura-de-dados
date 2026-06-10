@@ -5,12 +5,17 @@ public class GestorEmprestimos {
                            // catalogo
                            // pois ele tem O(1) para encontrar livros
 
-  public GestorEmprestimos() {
-  }
-
   public GestorEmprestimos(Catalogo catalog) {
     this.catalog = catalog;
     this.map = new NossoHash<>();
+  }
+
+  private void emprestaProxAux(Fila<Usuario> list, Livro l) {// metodo para auxiliar o emprestimo; DRY
+    if (l.isDisponivel() && !list.filaVazia()) {
+      Usuario proximo = list.desenfileira();
+      l.setDisponivel(false);
+      System.out.println("Próximo usuário atendido: " + proximo);
+    }
   }
 
   public void solicitarEmprestimo(String isbn, Usuario u) {
@@ -19,11 +24,8 @@ public class GestorEmprestimos {
     }
     Fila<Usuario> list = map.get(isbn);
     Livro l = catalog.buscar(isbn);
-    if (list.filaVazia() && l.isDisponivel()) {
-      l.setDisponivel(false);
-      return;
-    }
     list.enfileira(u);
+    emprestaProxAux(list, l);
   }
 
   public void devolverLivro(String isbn) {
@@ -33,9 +35,8 @@ public class GestorEmprestimos {
       l.setDisponivel(true);
       return;
     }
-    Usuario proximo = list.desenfileira();
-    l.setDisponivel(false);
-    System.out.println("Próximo usuário atendido: " + proximo);
+    emprestaProxAux(list, l);
+
   }
 
   public void listarFilaDeEspera(String isbn) {
