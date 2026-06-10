@@ -103,11 +103,6 @@ public class BibliotecaDigital {
           System.out.println("\n--- FILA DE ESPERA ---");
           System.out.print("Digite o ISBN do livro: ");
           String isbnFila = scn.nextLine();
-
-          if (catalogo.buscar(isbnFila) == null) {
-            System.out.println("Livro não encontrado");
-            break;
-          }
           gestor.listarFilaDeEspera(isbnFila);
           System.out.println();
           break;

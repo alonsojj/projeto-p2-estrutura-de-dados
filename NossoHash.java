@@ -9,7 +9,7 @@ public class NossoHash<K, V> {
   }
 
   private int hash(K key) {
-    return Math.abs(key.hashCode() % cap);
+    return Math.abs(key.hashCode()) % cap;
   }
 
   public void put(K key, V value) {
@@ -23,7 +23,8 @@ public class NossoHash<K, V> {
     int posicao = hash(key);
     Entrada<K, V> atual = tabela[posicao];
     while (atual != null) {
-      if (atual.key.equals(key)) return atual.value;
+      if (atual.key.equals(key))
+        return atual.value;
       atual = atual.proximo;
     }
     return null;
@@ -33,7 +34,8 @@ public class NossoHash<K, V> {
     int posicao = hash(key);
     Entrada<K, V> atual = tabela[posicao];
     while (atual != null) {
-      if (atual.key.equals(key)) return true;
+      if (atual.key.equals(key))
+        return true;
       atual = atual.proximo;
     }
     return false;
@@ -43,7 +45,8 @@ public class NossoHash<K, V> {
     for (int i = 0; i < tabela.length; i++) {
       Entrada<K, V> atual = tabela[i];
       while (atual != null) {
-        if (atual.value.equals(value)) return true;
+        if (atual.value.equals(value))
+          return true;
         atual = atual.proximo;
       }
     }
