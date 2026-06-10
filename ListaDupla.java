@@ -21,6 +21,11 @@ public class ListaDupla {
     if (estaVazia()) return null;
     Livro aux = primeiro.getInfo();
     primeiro = primeiro.getProximo();
+    if (primeiro == null) {
+      ultimo = null;
+    } else {
+      primeiro.setAnterior(null);
+    }
     return aux;
   }
 
@@ -39,7 +44,11 @@ public class ListaDupla {
     if (estaVazia()) return null;
     Livro aux = ultimo.getInfo();
     ultimo = ultimo.getAnterior();
-    ultimo.setProximo(null);
+    if (ultimo == null) {
+      primeiro = null;
+    } else {
+      ultimo.setProximo(null);
+    }
     return aux;
   }
 
