@@ -1,8 +1,7 @@
 import java.util.Scanner;
 
 public class BibliotecaDigital {
-  private static final String TEXTO =
-      """
+  private static final String TEXTO = """
                           BIBLIOTECA DIGITAL
             =================================================
             | 1. Cadastrar Livro                            |
@@ -22,12 +21,14 @@ public class BibliotecaDigital {
   public static void main(String[] args) {
     Scanner scn = new Scanner(System.in);
     int input = -1;
-    gestor =
-        new GestorEmprestimos(); // N informado sobre isso no PDF mas sem isso as listas ficariam
-    // desincronizada caso algum livro fosse adicionada
+    gestor = new GestorEmprestimos(catalogo);
+    // N informado sobre isso no PDF mas sem isso as listas ficariam
+    // desincronizada caso algum livro fosse adicionado, e GestorEmprestimo foi
+    // informado que precisa acessar os livros para torna disponivel false ou true
     do {
       System.out.println(TEXTO);
       input = scn.nextInt();
+      scn.nextLine();
       switch (input) {
         case 1:
           System.out.println("\n--- CADASTRAR LIVRO ---");
@@ -80,6 +81,10 @@ public class BibliotecaDigital {
           String isbnSolicitado = scn.nextLine();
 
           Usuario usuario = new Usuario(matricula, nome, email);
+          if (catalogo.buscar(isbnSolicitado) == null) {
+            System.out.println("Livro não encontrado");
+            break;
+          }
           gestor.solicitarEmprestimo(isbnSolicitado, usuario);
           System.out.println();
           break;
@@ -87,7 +92,10 @@ public class BibliotecaDigital {
           System.out.println("\n--- DEVOLVER LIVRO ---");
           System.out.print("Digite o ISBN do livro a ser devolvido: ");
           String isbnDevolucao = scn.nextLine();
-
+          if (catalogo.buscar(isbnDevolucao) == null) {
+            System.out.println("Livro não encontrado");
+            break;
+          }
           gestor.devolverLivro(isbnDevolucao);
           System.out.println();
           break;
@@ -96,6 +104,10 @@ public class BibliotecaDigital {
           System.out.print("Digite o ISBN do livro: ");
           String isbnFila = scn.nextLine();
 
+          if (catalogo.buscar(isbnFila) == null) {
+            System.out.println("Livro não encontrado");
+            break;
+          }
           gestor.listarFilaDeEspera(isbnFila);
           System.out.println();
           break;
