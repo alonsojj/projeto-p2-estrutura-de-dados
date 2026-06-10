@@ -19,7 +19,7 @@ public class GestorEmprestimos {
     }
     Fila<Usuario> list = map.get(isbn);
     Livro l = catalog.buscar(isbn);
-    if (list.filaVazia() || l.isDisponivel()) {
+    if (list.filaVazia() && l.isDisponivel()) {
       l.setDisponivel(false);
       return;
     }
@@ -28,16 +28,22 @@ public class GestorEmprestimos {
 
   public void devolverLivro(String isbn) {
     Fila<Usuario> list = map.get(isbn);
-    if (list.filaVazia()) {
-      Livro l = catalog.buscar(isbn);
+    Livro l = catalog.buscar(isbn);
+    if (list == null || list.filaVazia()) {
       l.setDisponivel(true);
       return;
     }
-    list.desenfileira();
+    Usuario proximo = list.desenfileira();
+    l.setDisponivel(false);
+    System.out.println("Próximo usuário atendido: " + proximo);
   }
 
   public void listarFilaDeEspera(String isbn) {
     Fila<Usuario> list = map.get(isbn);
+    if (list == null || list.filaVazia()) {
+      System.out.println("Nenhuma fila de espera para este livro.");
+      return;
+    }
     System.out.println(list);
   }
 }
