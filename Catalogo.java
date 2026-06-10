@@ -2,6 +2,10 @@ public class Catalogo {
 
   private NossoHash<String, Livro> catalog;
 
+  public Catalogo() {
+    this.catalog = new NossoHash<>();
+  }
+
   public void cadastra(Livro livro) {
     catalog.put(livro.getIsbn(), livro);
   }
