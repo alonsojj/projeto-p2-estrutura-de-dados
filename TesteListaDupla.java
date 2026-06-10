@@ -34,5 +34,13 @@ public class TesteListaDupla {
     System.out.println("\n\nBuscando Livro 1");
     Livro find = list.buscarPorIsbn("1");
     System.out.println("Livro encontrado: " + find);
+    System.out.println("\nEsvaziando a lista completamente");
+    while (list.tamanho() > 0) {
+      System.out.println("Removendo: " + list.removePrimeiro());
+    }
+
+    System.out.println("\nLista esvaziada. Tamanho atual: " + list.tamanho());
+    System.out.println("Listando do inicio apos esvaziar:");
+    list.listarDoInicio();
   }
 }
